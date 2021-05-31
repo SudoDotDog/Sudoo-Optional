@@ -6,16 +6,18 @@
 
 export class Optional<T extends any = any> {
 
-    public static of<T extends any = any>(target?: T): Optional<T> {
+    public static of<T extends any = any>(target?: T, identifier?: string): Optional<T> {
 
-        return new Optional<T>(target);
+        return new Optional<T>(target, identifier);
     }
 
     private readonly _target?: T;
+    private readonly _identifier?: string;
 
-    private constructor(target?: T) {
+    private constructor(target?: T, identifier?: string) {
 
         this._target = target;
+        this._identifier = identifier;
     }
 
     public get exists(): boolean {
@@ -26,5 +28,24 @@ export class Optional<T extends any = any> {
     public get value(): T | undefined {
 
         return this._target;
+    }
+
+    public getOrThrow(error?: Error): T {
+
+        if (this.exists) {
+            return this._target as T;
+        }
+
+        if (typeof error === 'undefined') {
+
+            if (typeof this._identifier === 'string') {
+
+                throw new Error(`[Sudoo-Optional] Get Undefined Target, Identifier: ${this._identifier}`);
+            }
+
+            throw new Error("[Sudoo-Optional] Get Unnamed Undefined Target");
+        }
+
+        throw error;
     }
 }
