@@ -11,6 +11,15 @@ export class Optional<T extends any = any> {
         return new Optional<T>(target, identifier);
     }
 
+    public static resolve<T extends any = any>(target?: T | Optional<T>, identifier?: string): Optional<T> {
+
+        if (target instanceof Optional) {
+
+            return Optional.of(target.value, identifier);
+        }
+        return Optional.of(target, identifier);
+    }
+
     private readonly _target?: T;
     private readonly _identifier?: string;
 
@@ -46,7 +55,6 @@ export class Optional<T extends any = any> {
 
             throw new Error("[Sudoo-Optional] Get Unnamed Undefined Target");
         }
-
         throw error;
     }
 
