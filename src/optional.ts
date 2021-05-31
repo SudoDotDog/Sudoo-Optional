@@ -33,6 +33,7 @@ export class Optional<T extends any = any> {
     public getOrThrow(error?: Error): T {
 
         if (this.exists) {
+
             return this._target as T;
         }
 
@@ -47,5 +48,14 @@ export class Optional<T extends any = any> {
         }
 
         throw error;
+    }
+
+    public getOrDefault(defaultValue: T): T {
+
+        if (this.exists) {
+
+            return this._target as T;
+        }
+        return defaultValue;
     }
 }
