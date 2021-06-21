@@ -14,7 +14,7 @@
   "homepage": "https://github.com/SudoDotDog/Sudoo-Optional#readme",
   "devDependencies": {
     "@sudoo/io": "^1.8.0",
-    "@sudoo/triforce": "^2.9.26"
+    "@sudoo/triforce": "^2.9.27"
   },
   "nyc": {
     "extension": [
