@@ -1,7 +1,7 @@
 # Sudoo-Optional
 
-[![Build Status](https://travis-ci.com/SudoDotDog/Sudoo-Optional.svg?branch=master)](https://travis-ci.com/SudoDotDog/Sudoo-Optional)
-[![codecov](https://codecov.io/gh/SudoDotDog/Sudoo-Optional/branch/master/graph/badge.svg)](https://codecov.io/gh/SudoDotDog/Sudoo-Optional)
+[![Continuous Integration](https://github.com/SudoDotDog/Sudoo-Optional/actions/workflows/ci.yml/badge.svg)](https://github.com/SudoDotDog/Sudoo-Optional/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/SudoDotDog/Sudoo-Optional/branch/main/graph/badge.svg)](https://codecov.io/gh/SudoDotDog/Sudoo-Optional)
 [![npm version](https://badge.fury.io/js/%40sudoo%2Foptional.svg)](https://badge.fury.io/js/%40sudoo%2Foptional)
 [![downloads](https://img.shields.io/npm/dm/@sudoo/optional.svg)](https://www.npmjs.com/package/@sudoo/optional)
 
