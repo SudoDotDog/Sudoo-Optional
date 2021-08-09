@@ -29,13 +29,13 @@ export class Optional<T extends any = any> {
         this._identifier = identifier;
     }
 
+    public get identifier(): string | undefined {
+        return this._identifier;
+    }
     public get exists(): boolean {
-
         return typeof this._target !== 'undefined';
     }
-
     public get value(): T | undefined {
-
         return this._target;
     }
 
