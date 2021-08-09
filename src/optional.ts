@@ -6,16 +6,22 @@
 
 export class Optional<T extends any = any> {
 
-    public static of<T extends any = any>(target?: T, identifier?: string): Optional<T> {
+    public static of<T extends any = any>(target?:  T | Optional<T>, identifier?: string): Optional<T> {
 
-        return new Optional<T>(target, identifier);
+        return Optional.resolve<T>(target, identifier);
     }
 
     public static resolve<T extends any = any>(target?: T | Optional<T>, identifier?: string): Optional<T> {
 
         if (target instanceof Optional) {
 
-            return Optional.of(target.value, identifier);
+            if (typeof identifier !== 'undefined') {
+                return Optional.of(target.value, identifier);
+            }
+            if (typeof target._identifier !== 'undefined') {
+                return Optional.of(target.value, target._identifier);
+            }
+            return Optional.of(target.value);
         }
         return Optional.of(target, identifier);
     }
