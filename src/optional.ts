@@ -6,9 +6,9 @@
 
 export class Optional<T extends any = any> {
 
-    public static of<T extends any = any>(target?:  T | Optional<T>, identifier?: string): Optional<T> {
+    public static of<T extends any = any>(target?: T, identifier?: string): Optional<T> {
 
-        return Optional.resolve<T>(target, identifier);
+        return new Optional(target, identifier);
     }
 
     public static resolve<T extends any = any>(target?: T | Optional<T>, identifier?: string): Optional<T> {
