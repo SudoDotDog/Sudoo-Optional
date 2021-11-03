@@ -7,14 +7,14 @@
 import { EmptyValueSymbol, SEmptyValue } from "@sudoo/symbol";
 import { OptionalFunction } from "./function";
 
-export class Optional<T extends any = any> {
+export class Optional<T = any> {
 
-    public static of<T extends any = any>(target: T | SEmptyValue | undefined, identifier?: string): Optional<T> {
+    public static of<T = any>(target: T | SEmptyValue | undefined, identifier?: string): Optional<T> {
 
         return new Optional(target, identifier);
     }
 
-    public static resolve<T extends any = any>(target: T | SEmptyValue | undefined | Optional<T>, identifier?: string): Optional<T> {
+    public static resolve<T = any>(target: T | SEmptyValue | undefined | Optional<T>, identifier?: string): Optional<T> {
 
         if (target instanceof Optional) {
 
