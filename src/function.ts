@@ -4,33 +4,47 @@
  * @description Function
  */
 
+import { EmptyValueSymbol, SEmptyValue } from "@sudoo/symbol";
+
 // eslint-disable-next-line @typescript-eslint/ban-types
 export class OptionalFunction<T extends Function> {
 
     // eslint-disable-next-line @typescript-eslint/ban-types
-    public static ofFunctionOrUndefined<T extends Function>(target?: T, identifier?: string): OptionalFunction<T> {
+    public static ofFunctionOrUndefined<T extends Function>(target: T | SEmptyValue | undefined, identifier?: string): OptionalFunction<T> {
 
         if (typeof target === 'undefined') {
-            return OptionalFunction.ofUndefined(identifier);
+            return OptionalFunction.ofEmpty(identifier);
         }
 
         if (typeof target !== 'function') {
-            return OptionalFunction.ofUndefined(identifier);
+            return OptionalFunction.ofEmpty(identifier);
         }
 
         return new OptionalFunction<T>(target, identifier);
     }
 
-    public static ofUndefined(identifier?: string): OptionalFunction<any> {
-        return new OptionalFunction<any>(undefined, identifier);
+    public static ofEmpty(identifier?: string): OptionalFunction<any> {
+        return new OptionalFunction<any>(EmptyValueSymbol, identifier);
     }
 
-    private readonly _target?: T;
+    private readonly _target: T | SEmptyValue;
     private readonly _identifier?: string;
 
-    private constructor(target?: T, identifier?: string) {
+    private constructor(target: T | SEmptyValue | undefined, identifier?: string) {
 
-        this._target = target;
+        if (typeof target === 'undefined') {
+            this._target = EmptyValueSymbol;
+        } else {
+            this._target = target;
+        }
+
         this._identifier = identifier;
+    }
+
+    public get identifier(): string | SEmptyValue {
+        return this._identifier;
+    }
+    public get exists(): boolean {
+        return this._target !== EmptyValueSymbol;
     }
 }

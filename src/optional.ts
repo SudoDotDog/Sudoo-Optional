@@ -29,6 +29,10 @@ export class Optional<T extends any = any> {
         return Optional.of(target, identifier);
     }
 
+    public static ofEmpty(identifier?: string): Optional<any> {
+        return new Optional(EmptyValueSymbol, identifier);
+    }
+
     private readonly _target: T | SEmptyValue;
     private readonly _identifier?: string;
 
@@ -106,6 +110,6 @@ export class Optional<T extends any = any> {
     // eslint-disable-next-line @typescript-eslint/ban-types
     public asFunction(): OptionalFunction<T extends Function ? T : any> {
 
-        return OptionalFunction.ofFunctionOrUndefined(this._target as any, this._identifier);
+        return OptionalFunction.ofFunctionOrUndefined<any>(this.getOrEmptyValueSymbol(), this._identifier);
     }
 }
