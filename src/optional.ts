@@ -4,47 +4,50 @@
  * @description Optional
  */
 
+import { EmptyValueSymbol, SEmptyValue } from "@sudoo/symbol";
 import { OptionalFunction } from "./function";
 
 export class Optional<T extends any = any> {
 
-    public static of<T extends any = any>(target?: T, identifier?: string): Optional<T> {
+    public static of<T extends any = any>(target: T | SEmptyValue | undefined, identifier?: string): Optional<T> {
 
         return new Optional(target, identifier);
     }
 
-    public static resolve<T extends any = any>(target?: T | Optional<T>, identifier?: string): Optional<T> {
+    public static resolve<T extends any = any>(target: T | SEmptyValue | undefined | Optional<T>, identifier?: string): Optional<T> {
 
         if (target instanceof Optional) {
 
             if (typeof identifier !== 'undefined') {
-                return Optional.of(target.value, identifier);
+                return Optional.of(target.getOrEmptyValueSymbol(), identifier);
             }
             if (typeof target._identifier !== 'undefined') {
-                return Optional.of(target.value, target._identifier);
+                return Optional.of(target.getOrEmptyValueSymbol(), target._identifier);
             }
-            return Optional.of(target.value);
+            return Optional.of(target.getOrEmptyValueSymbol());
         }
         return Optional.of(target, identifier);
     }
 
-    private readonly _target?: T;
+    private readonly _target: T | SEmptyValue;
     private readonly _identifier?: string;
 
-    private constructor(target?: T, identifier?: string) {
+    private constructor(target: T | SEmptyValue | undefined, identifier?: string) {
 
-        this._target = target;
+        if (typeof target === 'undefined') {
+            this._target = EmptyValueSymbol;
+        } else {
+            this._target = target;
+        }
+
         this._identifier = identifier;
     }
 
-    public get identifier(): string | undefined {
+    public get identifier(): string | SEmptyValue {
         return this._identifier;
     }
     public get exists(): boolean {
-        return typeof this._target !== 'undefined';
-    }
-    public get value(): T | undefined {
-        return this._target;
+        return this._target !== EmptyValueSymbol;
     }
 
     public optionalIdentifier(identifier: string): Optional<string> {
@@ -80,6 +83,22 @@ export class Optional<T extends any = any> {
     }
 
     public getOrUndefined(): T | undefined {
+
+        if (this._target === EmptyValueSymbol) {
+            return undefined;
+        }
+        return this._target;
+    }
+
+    public getOrNull(): T | null {
+
+        if (this._target === EmptyValueSymbol) {
+            return null;
+        }
+        return this._target;
+    }
+
+    public getOrEmptyValueSymbol(): T | SEmptyValue {
 
         return this._target;
     }
