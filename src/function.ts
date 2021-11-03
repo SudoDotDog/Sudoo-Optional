@@ -41,7 +41,7 @@ export class OptionalFunction<T extends Function> {
         this._identifier = identifier;
     }
 
-    public get identifier(): string | SEmptyValue {
+    public get identifier(): string | undefined {
         return this._identifier;
     }
     public get exists(): boolean {
