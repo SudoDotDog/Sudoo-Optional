@@ -4,6 +4,8 @@
  * @description Optional
  */
 
+import { OptionalFunction } from "./function";
+
 export class Optional<T extends any = any> {
 
     public static of<T extends any = any>(target?: T, identifier?: string): Optional<T> {
@@ -75,5 +77,11 @@ export class Optional<T extends any = any> {
             return this._target as T;
         }
         return defaultValue;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    public asFunction(): OptionalFunction<T extends Function ? T : any> {
+
+        return OptionalFunction.ofFunctionOrUndefined(this._target as any, this._identifier);
     }
 }

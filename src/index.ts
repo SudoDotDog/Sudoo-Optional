@@ -4,4 +4,6 @@
  * @description Index
  */
 
+export * from "./function";
 export * from "./optional";
+
