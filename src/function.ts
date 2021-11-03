@@ -8,10 +8,10 @@ import { EmptyValueSymbol, SEmptyValue } from "@sudoo/symbol";
 import { ArgumentTypes, ReturnTypes } from "./declare";
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export class OptionalFunction<T extends Function> {
+export class OptionalFunction<T extends Function = any> {
 
     // eslint-disable-next-line @typescript-eslint/ban-types
-    public static ofFunctionOrUndefined<T extends Function>(target: T | SEmptyValue | undefined, identifier?: string): OptionalFunction<T> {
+    public static ofFunctionOrUndefined<T extends Function = any>(target: T | SEmptyValue | undefined, identifier?: string): OptionalFunction<T> {
 
         if (typeof target === 'undefined') {
             return OptionalFunction.ofEmpty(identifier);
