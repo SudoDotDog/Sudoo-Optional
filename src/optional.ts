@@ -45,6 +45,10 @@ export class Optional<T extends any = any> {
         return this._target;
     }
 
+    public optionalIdentifier(identifier: string): Optional<string> {
+        return Optional.of(this._identifier, identifier);
+    }
+
     public getOrThrow(error?: Error): T {
 
         if (this.exists) {
