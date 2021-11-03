@@ -9,7 +9,7 @@ import { expect } from 'chai';
 import * as Chance from 'chance';
 import { Optional } from "../../src";
 
-describe('Given {Optional} class', (): void => {
+describe('Given {Optional} Class', (): void => {
 
     const chance: Chance.Chance = new Chance('optional-optional');
 
