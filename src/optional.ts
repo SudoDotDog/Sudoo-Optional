@@ -79,6 +79,11 @@ export class Optional<T extends any = any> {
         return defaultValue;
     }
 
+    public getOrUndefined(): T | undefined {
+
+        return this._target;
+    }
+
     // eslint-disable-next-line @typescript-eslint/ban-types
     public asFunction(): OptionalFunction<T extends Function ? T : any> {
 

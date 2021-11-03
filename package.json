@@ -12,9 +12,13 @@
     "url": "https://github.com/SudoDotDog/Sudoo-Optional/issues"
   },
   "homepage": "https://github.com/SudoDotDog/Sudoo-Optional#readme",
+  "peerDependencies": {
+    "@sudoo/symbol": "*"
+  },
   "devDependencies": {
     "@sudoo/build-utils": "^1.0.0",
     "@sudoo/license": "^1.1.0",
+    "@sudoo/symbol": "^1.1.0",
     "@sudoo/triforce": "^2.15.1"
   },
   "nyc": {

@@ -11,8 +11,10 @@ Optional makes life better
 
 ```sh
 yarn add @sudoo/optional
+yarn add @sudoo/symbol # Peer Dependency
 # Or
 npm install @sudoo/optional --save
+npm install @sudoo/symbol --save # Peer Dependency
 ```
 
 ## Usage
