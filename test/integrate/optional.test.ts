@@ -26,7 +26,7 @@ describe('Given {Optional} Integrate', (): void => {
     it('should be able to get with or undefined', (): void => {
 
         const target: string = chance.string();
-        const optional: Optional<string> = Optional.of(target);
+        const optional: Optional<string> = Optional.ofAny(target);
 
         const result: string | undefined = optional.getOrUndefined();
 

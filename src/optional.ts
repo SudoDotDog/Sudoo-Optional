@@ -9,7 +9,7 @@ import { OptionalFunction } from "./function";
 
 export class Optional<T = any> {
 
-    public static of<T = any>(
+    public static ofAny<T = any>(
         target: T | SEmptyValue | Optional<T>,
         identifier?: string,
     ): Optional<T> {
@@ -17,12 +17,12 @@ export class Optional<T = any> {
         if (target instanceof Optional) {
 
             if (typeof identifier !== 'undefined') {
-                return Optional.of(target.getOrEmptyValueSymbol(), identifier);
+                return Optional.ofAny(target.getOrEmptyValueSymbol(), identifier);
             }
             if (typeof target._identifier !== 'undefined') {
-                return Optional.of(target.getOrEmptyValueSymbol(), target._identifier);
+                return Optional.ofAny(target.getOrEmptyValueSymbol(), target._identifier);
             }
-            return Optional.of(target.getOrEmptyValueSymbol());
+            return Optional.ofAny(target.getOrEmptyValueSymbol());
         }
 
         return new Optional(target, identifier);
@@ -36,7 +36,7 @@ export class Optional<T = any> {
         if (target === null) {
             return Optional.ofEmpty(identifier);
         }
-        return Optional.of(target, identifier);
+        return Optional.ofAny(target, identifier);
     }
 
     public static ofUndefinable<T = any>(
@@ -47,10 +47,10 @@ export class Optional<T = any> {
         if (typeof target === 'undefined') {
             return Optional.ofEmpty(identifier);
         }
-        return Optional.of(target, identifier);
+        return Optional.ofAny(target, identifier);
     }
 
-    public static ofAny<T = any>(
+    public static ofNullAndUndefinable<T = any>(
         target: T | SEmptyValue | Optional<T> | null | undefined,
         identifier?: string,
     ): Optional<T> {
@@ -58,11 +58,11 @@ export class Optional<T = any> {
         if (target === null || typeof target === 'undefined') {
             return Optional.ofEmpty(identifier);
         }
-        return Optional.of(target, identifier);
+        return Optional.ofAny(target, identifier);
     }
 
     public static ofEmpty(identifier?: string): Optional<any> {
-        return Optional.of(EmptyValueSymbol, identifier);
+        return Optional.ofAny(EmptyValueSymbol, identifier);
     }
 
     public static ofNull(identifier?: string): Optional<any> {
@@ -103,7 +103,7 @@ export class Optional<T = any> {
 
         if (this.exists) {
             const result: K = target(this._target as T);
-            return Optional.of(result);
+            return Optional.ofAny(result);
         }
         return Optional.ofEmpty(identifier);
     }

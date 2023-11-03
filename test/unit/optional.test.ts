@@ -16,7 +16,7 @@ describe('Given {Optional} Class', (): void => {
     it('should be able to construct', (): void => {
 
         const target: string = chance.string();
-        const optional: Optional = Optional.of(target);
+        const optional: Optional = Optional.ofAny(target);
 
         expect(optional).to.be.instanceOf(Optional);
     });

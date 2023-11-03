@@ -22,11 +22,11 @@ npm install @sudoo/symbol --save # Peer Dependency
 ```ts
 import { Optional } from "@sudoo/optional";
 
-const foo: Optional = Optional.of("bar");
+const foo: Optional = Optional.ofAny("bar");
 foo.exists; // true
 foo.value; // "bar"
 
-const bar: Optional = Optional.of();
+const bar: Optional = Optional.ofUndefinable();
 bar.exists; // false
 bar.value; // undefined
 bar.getOrThrow(); // Throw Error A
