@@ -11,11 +11,10 @@ import { ArgumentTypes, ReturnTypes } from "./declare";
 export class OptionalFunction<T extends Function = any> {
 
     // eslint-disable-next-line @typescript-eslint/ban-types
-    public static ofFunctionOrUndefined<T extends Function = any>(target: T | SEmptyValue | undefined, identifier?: string): OptionalFunction<T> {
-
-        if (typeof target === 'undefined') {
-            return OptionalFunction.ofEmpty(identifier);
-        }
+    public static ofFunction<T extends Function = any>(
+        target: T | SEmptyValue,
+        identifier?: string
+    ): OptionalFunction<T> {
 
         if (typeof target !== 'function') {
             return OptionalFunction.ofEmpty(identifier);
@@ -31,14 +30,9 @@ export class OptionalFunction<T extends Function = any> {
     private readonly _target: T | SEmptyValue;
     private readonly _identifier?: string;
 
-    private constructor(target: T | SEmptyValue | undefined, identifier?: string) {
+    private constructor(target: T | SEmptyValue, identifier?: string) {
 
-        if (typeof target === 'undefined') {
-            this._target = EmptyValueSymbol;
-        } else {
-            this._target = target;
-        }
-
+        this._target = target;
         this._identifier = identifier;
     }
 

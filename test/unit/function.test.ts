@@ -16,9 +16,10 @@ describe('Given {OptionalFunction} Class', (): void => {
     it('should be able to construct', (): void => {
 
         const targetReturn: string = chance.string();
-        const optional: OptionalFunction = OptionalFunction.ofFunctionOrUndefined(() => {
-            return targetReturn;
-        });
+        const optional: OptionalFunction = OptionalFunction
+            .ofFunction(() => {
+                return targetReturn;
+            });
 
         expect(optional).to.be.instanceOf(OptionalFunction);
     });

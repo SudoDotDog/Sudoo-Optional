@@ -148,6 +148,9 @@ export class Optional<T = any> {
     // eslint-disable-next-line @typescript-eslint/ban-types
     public asFunction(): OptionalFunction<T extends Function ? T : any> {
 
-        return OptionalFunction.ofFunctionOrUndefined<any>(this.getOrEmptyValueSymbol(), this._identifier);
+        return OptionalFunction.ofFunction<any>(
+            this.getOrEmptyValueSymbol(),
+            this._identifier,
+        );
     }
 }
