@@ -96,6 +96,28 @@ export class Optional<T = any> {
         return Optional.ofUndefinable(this._identifier, identifier);
     }
 
+    public map<K>(
+        target: (current: T) => K,
+        identifier?: string,
+    ): Optional<K> {
+
+        if (this.exists) {
+            const result: K = target(this._target as T);
+            return Optional.of(result);
+        }
+        return Optional.ofEmpty(identifier);
+    }
+
+    public ifExist(
+        target: (current: T) => void,
+    ): this {
+
+        if (this.exists) {
+            target(this._target as T);
+        }
+        return this;
+    }
+
     public getOrThrow(error?: Error): T {
 
         if (this.exists) {
