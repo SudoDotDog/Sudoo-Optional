@@ -9,12 +9,7 @@ import { OptionalFunction } from "./function";
 
 export class Optional<T = any> {
 
-    public static of<T = any>(target: T | SEmptyValue | undefined, identifier?: string): Optional<T> {
-
-        return new Optional(target, identifier);
-    }
-
-    public static resolve<T = any>(target: T | SEmptyValue | undefined | Optional<T>, identifier?: string): Optional<T> {
+    public static of<T = any>(target: T | SEmptyValue | Optional<T>, identifier?: string): Optional<T> {
 
         if (target instanceof Optional) {
 
@@ -26,7 +21,8 @@ export class Optional<T = any> {
             }
             return Optional.of(target.getOrEmptyValueSymbol());
         }
-        return Optional.of(target, identifier);
+
+        return new Optional(target, identifier);
     }
 
     public static ofEmpty(identifier?: string): Optional<any> {
@@ -36,14 +32,9 @@ export class Optional<T = any> {
     private readonly _target: T | SEmptyValue;
     private readonly _identifier?: string;
 
-    private constructor(target: T | SEmptyValue | undefined, identifier?: string) {
+    private constructor(target: T | SEmptyValue, identifier?: string) {
 
-        if (typeof target === 'undefined') {
-            this._target = EmptyValueSymbol;
-        } else {
-            this._target = target;
-        }
-
+        this._target = target;
         this._identifier = identifier;
     }
 
