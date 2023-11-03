@@ -9,7 +9,10 @@ import { OptionalFunction } from "./function";
 
 export class Optional<T = any> {
 
-    public static of<T = any>(target: T | SEmptyValue | Optional<T>, identifier?: string): Optional<T> {
+    public static of<T = any>(
+        target: T | SEmptyValue | Optional<T>,
+        identifier?: string,
+    ): Optional<T> {
 
         if (target instanceof Optional) {
 
@@ -25,14 +28,58 @@ export class Optional<T = any> {
         return new Optional(target, identifier);
     }
 
+    public static ofNullable<T = any>(
+        target: T | SEmptyValue | Optional<T> | null,
+        identifier?: string,
+    ): Optional<T> {
+
+        if (target === null) {
+            return Optional.ofEmpty(identifier);
+        }
+        return Optional.of(target, identifier);
+    }
+
+    public static ofUndefinable<T = any>(
+        target: T | SEmptyValue | Optional<T> | undefined,
+        identifier?: string,
+    ): Optional<T> {
+
+        if (typeof target === 'undefined') {
+            return Optional.ofEmpty(identifier);
+        }
+        return Optional.of(target, identifier);
+    }
+
+    public static ofAny<T = any>(
+        target: T | SEmptyValue | Optional<T> | null | undefined,
+        identifier?: string,
+    ): Optional<T> {
+
+        if (target === null || typeof target === 'undefined') {
+            return Optional.ofEmpty(identifier);
+        }
+        return Optional.of(target, identifier);
+    }
+
     public static ofEmpty(identifier?: string): Optional<any> {
-        return new Optional(EmptyValueSymbol, identifier);
+        return Optional.of(EmptyValueSymbol, identifier);
+    }
+
+    public static ofNull(identifier?: string): Optional<any> {
+        return Optional.ofNullable(null, identifier);
+    }
+
+    public static ofUndefined(identifier?: string): Optional<any> {
+        return Optional.ofUndefinable(undefined, identifier);
     }
 
     private readonly _target: T | SEmptyValue;
     private readonly _identifier?: string;
 
-    private constructor(target: T | SEmptyValue, identifier?: string) {
+    private constructor(
+        target: T | SEmptyValue,
+        identifier?: string,
+    ) {
 
         this._target = target;
         this._identifier = identifier;
@@ -46,7 +93,7 @@ export class Optional<T = any> {
     }
 
     public optionalIdentifier(identifier: string): Optional<string> {
-        return Optional.of(this._identifier, identifier);
+        return Optional.ofUndefinable(this._identifier, identifier);
     }
 
     public getOrThrow(error?: Error): T {
