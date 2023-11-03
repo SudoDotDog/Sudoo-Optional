@@ -15,7 +15,7 @@ describe('Given {Optional} Integrate', (): void => {
 
     it('should be able to construct to empty with other type', (): void => {
 
-        const optional: Optional<string> = Optional.of<string>(undefined);
+        const optional: Optional<string> = Optional.ofUndefinable<string>(undefined);
 
         const result: string | undefined = optional.getOrUndefined();
 

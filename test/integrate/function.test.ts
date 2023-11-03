@@ -15,7 +15,7 @@ describe('Given {OptionalFunction} Integrate', (): void => {
 
     it('should be able to construct to empty with other type', (): void => {
 
-        const optional: OptionalFunction<() => string> = OptionalFunction.ofFunctionOrUndefined(chance.string() as any);
+        const optional: OptionalFunction<() => string> = OptionalFunction.ofFunction(chance.string() as any);
 
         const result: string | undefined = optional.executeOrUndefined();
 
@@ -26,7 +26,7 @@ describe('Given {OptionalFunction} Integrate', (): void => {
     it('should be able to execute with or undefined', (): void => {
 
         const targetReturn: string = chance.string();
-        const optional: OptionalFunction<() => string> = OptionalFunction.ofFunctionOrUndefined(() => {
+        const optional: OptionalFunction<() => string> = OptionalFunction.ofFunction(() => {
             return targetReturn;
         });
 
