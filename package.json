@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@sudoo/build-utils": "^1.0.0",
-    "@sudoo/license": "^2.1.0",
+    "@sudoo/license": "^2.2.0",
     "@sudoo/symbol": "^1.2.0",
     "@sudoo/triforce": "^3.12.0"
   },
